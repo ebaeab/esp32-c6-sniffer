@@ -13,6 +13,7 @@ typedef struct {
     uint8_t dest_mac[6];
     uint8_t source_mac[6];
     uint8_t bssid[6];
+    uint8_t seq_num[2];
     uint8_t payload[0];
 } sniffer_payload_t;
 

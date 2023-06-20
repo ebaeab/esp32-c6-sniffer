@@ -176,7 +176,7 @@ static inline uint32_t sniffer_timestamp()
 
 station_info_t *station_info    = NULL;
 int s_device_info_num           = 0;
-uint8_t  bssid[6] = {0x24,0xCF,0x24,0xE6,0x3A,0x09};
+uint8_t  bssid[6] = {0x8C,0xA6,0xDF,0xEB,0x99,0x66};
 void wifi_sniffer_cb(void *recv_buf, wifi_promiscuous_pkt_type_t type)
 {
     wifi_promiscuous_pkt_t *sniffer = (wifi_promiscuous_pkt_t *)recv_buf;
@@ -188,7 +188,7 @@ void wifi_sniffer_cb(void *recv_buf, wifi_promiscuous_pkt_type_t type)
     if (0 != memcmp(bssid,sniffer_payload->bssid,6))
     {
         return;
-    }
+    } 
     if (sniffer_payload->header[0] != 0x80)
     {
         return;
@@ -197,7 +197,14 @@ void wifi_sniffer_cb(void *recv_buf, wifi_promiscuous_pkt_type_t type)
     /*printf("header[%02X][%02X][%02X][%02X]\n",\
     sniffer_payload->header[0],sniffer_payload->header[1],sniffer_payload->header[2],sniffer_payload->header[3]);
     */
-    printf("[%02X][%02X][%02X][%02X][%02X][%02X][%02X][%02X][%02X][%02X]\n",sniffer_payload->payload[0],sniffer_payload->payload[1],sniffer_payload->payload[2],sniffer_payload->payload[3],sniffer_payload->payload[4],sniffer_payload->payload[5],sniffer_payload->payload[6],sniffer_payload->payload[7],sniffer_payload->payload[8],sniffer_payload->payload[9]);
+   printf("\n");
+   //printf("bssid:[%02X][%02X][%02X][%02X][%02X][%02X]\n",sniffer_payload->bssid[0],sniffer_payload->bssid[1],sniffer_payload->bssid[2],sniffer_payload->bssid[3],sniffer_payload->bssid[4],sniffer_payload->bssid[5]);
+   for (size_t i = 0; i < 168; i++)
+   {
+        printf("%02X",sniffer_payload->payload[i]);
+   }
+   printf("\n");
+    //printf("[%02X][%02X][%02X][%02X][%02X][%02X][%02X][%02X][%02X][%02X]\n",sniffer_payload->payload[0],sniffer_payload->payload[1],sniffer_payload->payload[2],sniffer_payload->payload[3],sniffer_payload->payload[4],sniffer_payload->payload[5],sniffer_payload->payload[6],sniffer_payload->payload[7],sniffer_payload->payload[8],sniffer_payload->payload[9]);
     //printf("MAC: 0x%02X.0x%02X.0x%02X.0x%02X.0x%02X.0x%02X\n", sniffer_payload->bssid[0], sniffer_payload->bssid[1], sniffer_payload->bssid[2], sniffer_payload->bssid[3], sniffer_payload->bssid[4], sniffer_payload->bssid[5]);
 }
 
